@@ -15,9 +15,8 @@ function acf_php_recovery_menu() {
 add_action('admin_menu', 'acf_php_recovery_menu', 100);
 
 function acf_php_recovery_page() {
+	
   global $wpdb;
-
-  $acf_local = acf_local();
 
   // process the form
   if(isset($_POST['acf_php_recovery_action']) && $_POST['acf_php_recovery_action'] == 'import' && isset($_POST['fieldsets']) && check_admin_referer( 'acf_php_recovery' ) ) {
@@ -28,7 +27,7 @@ function acf_php_recovery_page() {
     $key_to_post_id = array(); // Group or field key to post id
 
     // Now we can import the groups
-    foreach( $acf_local->groups as $key => $group ) {
+    foreach( acf()->local->groups as $key => $group ) {
       $group['title'] = $group['title'] . ' (Recovered)';
 
       // Only import those that were selected
@@ -50,7 +49,7 @@ function acf_php_recovery_page() {
     $imported_fields = array(); // Keep track of the already imported
     do {
       $num_import = 0;
-      foreach( $acf_local->fields as $key => $field ) {
+      foreach( acf()->local->fields as $key => $field ) {
         if ( !in_array($key, $imported_fields) && in_array($field['parent'], $field_parents) ) {
           $num_import = $num_import + 1;
           $field_parents[] = $key;
@@ -154,8 +153,6 @@ function acf_php_recovery_page() {
   </div>
   <?php
 }
-
-
 
 // Add settings link on plugin page
 function acf_php_recovery_settings_link($links) {
