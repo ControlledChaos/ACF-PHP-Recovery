@@ -1,11 +1,16 @@
 <?php
-/*
-  Plugin Name: ACF PHP Recovery Tool
-  Description: Converts your PHP export back-in as an editable ACF fields. To be used when you lose the original database and json fieldsets.
-  Author: BE API
-  Author URI: http://www.beapi.fr
-  Version: 1.0.0
-*/
+/**
+ * Plugin Name: ACF PHP Recovery Tool
+ * Plugin URI: https://github.com/ControlledChaos/ACF-PHP-Recovery
+ * Description: Converts your PHP export back-in as an editable ACF fields. To be used when you lose the original database and json fieldsets.
+ * Author: BE API
+ * Author URI: http://www.beapi.fr
+ * Version: 1.0.0
+ * License: GPL-3.0+
+ * License URI: https://www.gnu.org/licenses/gpl.txt
+ * Text Domain: acf-recovery
+ * Tested up to: 5.2.3
+ */
 
 define('ACFPR_GROUP_POST_TYPE', 'acf-field-group');
 
@@ -15,7 +20,7 @@ function acf_php_recovery_menu() {
 add_action('admin_menu', 'acf_php_recovery_menu', 100);
 
 function acf_php_recovery_page() {
-	
+
   global $wpdb;
 
   // process the form
